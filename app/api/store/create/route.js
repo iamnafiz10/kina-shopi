@@ -1,6 +1,7 @@
 import {getAuth} from '@clerk/nextjs/server';
 import {NextResponse} from "next/server";
 import imageKit from "@/configs/imageKit";
+import prisma from "@/lib/prisma";
 
 // Create the store
 export async function POST(request) {
@@ -37,7 +38,7 @@ export async function POST(request) {
         const buffer = Buffer.from(await image.arrayBuffer());
         const response = await imageKit.upload({
             file: buffer,
-            fileName: ïmage.name,
+            fileName: image.name,
             folder: "logos"
         })
         const optimizedImage = imageKit.url({
